@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const test = "Jacek";
+import { user } from "../setup";
+const logout = () => {
+    localStorage.clear();
+    user.email = "";
+    user.name = "";
+};
 </script>
 
 <template>
@@ -9,11 +14,17 @@ const test = "Jacek";
         >
             ToDoApp
         </button>
-        <button
-            class="inline-block align-middle flex-initial hover:text-black mx-6"
-        >
-            Hello, {{ test }}
-        </button>
+        <div class="inline-block align-middle flex-initial" v-show="user.name">
+            <button class="hover:text-black mx-3 align-middle">
+                Hello, {{ user.name }}
+            </button>
+            <button
+                @click="logout"
+                class="hover:text-black mx-3 mr-6 align-middle"
+            >
+                Logout
+            </button>
+        </div>
     </nav>
 </template>
 

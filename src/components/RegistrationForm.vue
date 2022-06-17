@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import axios from "axios";
 import { reactive } from "vue";
-import config from "../config.json";
-import { user } from "../setup";
 import { register } from "../functions/auth";
 
 const registerform = reactive({

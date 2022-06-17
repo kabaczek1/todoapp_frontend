@@ -1,5 +1,3 @@
-import config from "./config.json";
-import axios from "axios";
 import { reactive, ref } from "vue";
 import { IUserLS } from "./interfaces/User";
 

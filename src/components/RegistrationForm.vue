@@ -1,14 +1,26 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import { register } from "../functions/auth";
+import { toast } from "../setup";
 
 const registerform = reactive({
     name: "Jacek",
     email: "test2@test.com",
     password: "Aaaaaa1!",
 });
+const clearform = () => {
+    registerform.name = "";
+    registerform.email = "";
+    registerform.password = "";
+};
+
 const register_form_handler = async () => {
-    register(registerform.name, registerform.email, registerform.password);
+    toast.text = await register(
+        registerform.name,
+        registerform.email,
+        registerform.password
+    );
+    if (toast.text == "User created") clearform();
 };
 </script>
 

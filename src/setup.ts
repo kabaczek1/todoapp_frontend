@@ -19,4 +19,4 @@ if (LS_user) {
 }
 
 export const user = reactive(user_data);
-export const toast = reactive({ text: "" });
+export const toast = reactive({ text: "Toast" });

@@ -40,6 +40,6 @@ export const register = async (
         // @ts-ignore
         output = e.response.data.message;
     }
-    console.log(output);
+    //console.log(output);
     return output;
 };

@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar.vue";
 import NoLogin from "./components/NoLogin.vue";
 import TaskList from "./components/TaskList.vue";
 import BackendOffline from "./components/BackendOffline.vue";
+import Toast from "./components/Toast.vue";
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import BackendOffline from "./components/BackendOffline.vue";
     <NoLogin v-if="user.name == ''" />
     <TaskList v-if="user.name != ''" />
 
+    <Toast />
     <BackendOffline />
 </template>
 

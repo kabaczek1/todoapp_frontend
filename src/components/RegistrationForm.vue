@@ -4,11 +4,11 @@ import { register } from "../functions/auth";
 
 const registerform = reactive({
     name: "Jacek",
-    email: "test@test.com",
+    email: "test2@test.com",
     password: "Aaaaaa1!",
 });
 const register_form_handler = async () => {
-    register("Jacek", registerform.email, registerform.password);
+    register(registerform.name, registerform.email, registerform.password);
 };
 </script>
 

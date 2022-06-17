@@ -26,6 +26,20 @@ export const register = async (
     name: string,
     email: string,
     password: string
-) => {
-    console.log(name, email, password);
+): Promise<string> => {
+    let output = "";
+    //console.log("register: ", name, email, password);
+    try {
+        const res = await axios.post(`${config.backend}/register`, {
+            name: name,
+            email: email,
+            password: password,
+        });
+        output = res.data.message;
+    } catch (e) {
+        // @ts-ignore
+        output = e.response.data.message;
+    }
+    console.log(output);
+    return output;
 };

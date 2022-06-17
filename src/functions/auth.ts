@@ -3,13 +3,13 @@ import config from "../config.json";
 import { user } from "../setup";
 
 export const login = async (email: string, password: string) => {
-    console.log(email + " " + password);
+    //console.log(email + " " + password);
     try {
         const res = await axios.post(`${config.backend}/login`, {
             email: email,
             password: password,
         });
-        console.log(res.data);
+        //console.log(res.data);
         localStorage.setItem(
             "user",
             JSON.stringify({ name: res.data.name, email: email })

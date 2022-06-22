@@ -5,6 +5,7 @@ import { ITask, blankTask } from "../interfaces/Task";
 
 import { onMounted, reactive } from "vue";
 import Task from "./Task.vue";
+import TaskForm from "./TaskForm.vue";
 
 const tasks = reactive([blankTask]);
 tasks.pop();
@@ -27,5 +28,6 @@ const getTasks = async () => {
 </script>
 
 <template>
+    <TaskForm />
     <Task v-for="task in tasks" :key="task._id" :task="task" />
 </template>

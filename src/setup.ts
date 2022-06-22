@@ -1,5 +1,6 @@
 import { reactive } from "vue";
 import { IUserLS } from "./interfaces/User";
+import { ITask, blankTask } from "./interfaces/Task";
 import config from "./config.json";
 import axios from "axios";
 
@@ -18,8 +19,9 @@ if (LS_user) {
     user_data = JSON.parse(LS_user);
 }
 
+export const formTask: Partial<ITask> = reactive(blankTask);
 export const user = reactive(user_data);
-export const toast = reactive({ text: "Toast" });
+export const toast = reactive({ text: "" });
 
 axios.interceptors.request.use((config) => {
     const token = localStorage.getItem("jwt");

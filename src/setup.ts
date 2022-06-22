@@ -22,6 +22,8 @@ if (LS_user) {
 export const formTask: Partial<ITask> = reactive(blankTask);
 export const user = reactive(user_data);
 export const toast = reactive({ text: "" });
+export const formErrorMsg = reactive({ text: "" });
+export const tasks = reactive([blankTask]);
 
 axios.interceptors.request.use((config) => {
     const token = localStorage.getItem("jwt");

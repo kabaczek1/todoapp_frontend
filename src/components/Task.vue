@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { computed } from "@vue/reactivity";
 import { ITask } from "../interfaces/Task";
-import { updateTask } from "../functions/task";
+import {
+    sendTasktoUpdate,
+    deleteTask,
+    updateTaskDoneStatus,
+} from "../functions/task";
+import { formTask } from "../setup";
 const props = defineProps<{
     task: ITask;
 }>();
@@ -19,10 +24,23 @@ const time_string = (timestamp: number) => {
         <p class="text-3xl">{{ task.name }}</p>
         <p>{{ task.desc }}</p>
         <button
-            @click.prevent="updateTask(task._id)"
+            @click.prevent="updateTaskDoneStatus(task._id)"
             class="bg-indigo-300 hover:bg-indigo-400 m-2 active:bg-indigo-500 active:shadow-lg px-2 py-1 rounded col-span-3"
         >
             {{ task.done ? "Done" : "Not Done" }}
+        </button>
+        <button
+            @click.prevent="deleteTask(task._id)"
+            class="bg-indigo-300 hover:bg-indigo-400 m-2 active:bg-indigo-500 active:shadow-lg px-2 py-1 rounded col-span-3"
+        >
+            Delete
+        </button>
+        <button
+            v-show="!formTask._id"
+            @click.prevent="sendTasktoUpdate(task._id)"
+            class="bg-indigo-300 hover:bg-indigo-400 m-2 active:bg-indigo-500 active:shadow-lg px-2 py-1 rounded col-span-3"
+        >
+            Update
         </button>
     </div>
 </template>

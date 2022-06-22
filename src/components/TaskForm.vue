@@ -5,7 +5,7 @@ import { submitForm, cancelUpdate } from "../functions/task";
 
 <template>
     <div
-        class="bg-indigo-100 m-4 p-4 rounded md:w-96 md:mx-auto grid gap-4 grid-cols-3 grid-rows-3"
+        class="bg-indigo-100 m-4 p-4 rounded md:w-[40rem] md:mx-auto grid gap-4 grid-cols-3 grid-rows-3"
     >
         <label class="m-auto"> Name </label>
         <input

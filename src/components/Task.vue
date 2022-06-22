@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "@vue/reactivity";
 import { ITask } from "../interfaces/Task";
 import {
     sendTasktoUpdate,
@@ -17,7 +16,7 @@ const time_string = (timestamp: number) => {
 </script>
 
 <template>
-    <div class="bg-indigo-100 m-4 p-4 rounded md:w-96 md:mx-auto">
+    <div class="bg-indigo-100 m-4 p-4 rounded md:w-[40rem] md:mx-auto">
         <p class="text-xs font-extralight text-slate-500">
             {{ time_string(task.created_at) }}
         </p>

@@ -58,6 +58,8 @@ const updateTask = async (formTask: Partial<ITask>) => {
 
 export const cancelUpdate = async () => {
     clearForm();
+    formErrorMsg.text = "";
+    tasks.splice(0, tasks.length);
     addTasksToLocalArray();
 };
 

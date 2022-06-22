@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "@vue/reactivity";
 import { ITask } from "../interfaces/Task";
+import { updateTask } from "../functions/task";
 const props = defineProps<{
     task: ITask;
 }>();
@@ -17,6 +18,11 @@ const time_string = (timestamp: number) => {
         </p>
         <p class="text-3xl">{{ task.name }}</p>
         <p>{{ task.desc }}</p>
-        <button>{{ task.done ? "Done" : "Not Done" }}</button>
+        <button
+            @click.prevent="updateTask(task._id)"
+            class="bg-indigo-300 hover:bg-indigo-400 m-2 active:bg-indigo-500 active:shadow-lg px-2 py-1 rounded col-span-3"
+        >
+            {{ task.done ? "Done" : "Not Done" }}
+        </button>
     </div>
 </template>

@@ -1,15 +1,6 @@
 <script setup lang="ts">
-import { ITask } from "../interfaces/Task";
 import { formTask } from "../setup";
-const submitForm = (formTask: Partial<ITask>) => {
-    console.log(formTask);
-    clearForm();
-};
-const clearForm = () => {
-    formTask._id = "";
-    formTask.name = "";
-    formTask.desc = "";
-};
+import { submitForm } from "../functions/task";
 </script>
 
 <template>

@@ -1,6 +1,7 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import config from "../config.json";
 import { user } from "../setup";
+import { loginErrorMsg } from "../setup";
 
 export const login = async (email: string, password: string) => {
     //console.log(email + " " + password);
@@ -17,8 +18,9 @@ export const login = async (email: string, password: string) => {
         localStorage.setItem("jwt", res.data.token);
         user.name = res.data.name;
         user.email = email;
-    } catch (e) {
+    } catch (e: any) {
         console.log(e);
+        loginErrorMsg.text = e.response.data.message;
     }
 };
 
@@ -36,8 +38,7 @@ export const register = async (
             password: password,
         });
         output = res.data.message;
-    } catch (e) {
-        // @ts-ignore
+    } catch (e: any) {
         output = e.response.data.message;
     }
     //console.log(output);

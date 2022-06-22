@@ -33,10 +33,15 @@ export const getAllTasks = async () => {
 
 export const sendTasktoUpdate = (id: string) => {
     const taskIndex = findTaskById(id);
-    formTask._id = tasks[taskIndex]._id;
-    formTask.name = tasks[taskIndex].name;
-    formTask.desc = tasks[taskIndex].desc;
-    formTask.done = tasks[taskIndex].done;
+    const keys = ["_id", "name", "desc", "done"];
+    keys.forEach((key) => {
+        // @ts-ignore
+        formTask[key] = tasks[taskIndex][key];
+    });
+    // formTask._id = tasks[taskIndex]._id;
+    // formTask.name = tasks[taskIndex].name;
+    // formTask.desc = tasks[taskIndex].desc;
+    // formTask.done = tasks[taskIndex].done;
     tasks.splice(taskIndex, 1);
     window.scrollTo(0, 0);
 };

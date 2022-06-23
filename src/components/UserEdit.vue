@@ -3,20 +3,21 @@ import { reactive } from "vue";
 import Joi from "joi";
 import passwordComplexity from "joi-password-complexity";
 import { IUser } from "../interfaces/User";
-import { register } from "../functions/auth";
-import { registerErrorMsg } from "../setup";
+import { deleteUser, update } from "../functions/auth";
+import { editUserErrorMsg, toast, user } from "../setup";
+import { logout } from "../functions/auth";
 
-const registerform = reactive({
-    name: "Jacek",
-    email: "test2@test.com",
-    password: "Aaaaaa1!",
+const edituserform = reactive({
+    name: user.name,
+    email: user.email,
+    password: "Aaaaaa1!", //tests
     pass2: "Aaaaaa1!",
 });
 const clearform = () => {
-    registerform.name = "";
-    registerform.email = "";
-    registerform.password = "";
-    registerform.pass2 = "";
+    edituserform.name = "";
+    edituserform.email = "";
+    edituserform.password = "";
+    edituserform.pass2 = "";
 };
 
 const validate = (data: IUser) => {
@@ -32,28 +33,33 @@ const validate = (data: IUser) => {
     return schema.validate(data);
 };
 
-const register_form_handler = async () => {
-    if (!(registerform.pass2 == registerform.password)) {
-        registerErrorMsg.text = "Password must be the same";
+const edit_user_form_handler = async () => {
+    if (!(edituserform.pass2 == edituserform.password)) {
+        editUserErrorMsg.text = "Password must be the same";
         return;
     }
-    const { error } = validate(registerform);
+    const { error } = validate(edituserform);
     if (error) {
         console.log(error.details);
         const output: string[] = [];
         error.details.forEach((element) => {
             output.push(element.message);
         });
-        registerErrorMsg.text = output.join("<br>");
+        editUserErrorMsg.text = output.join("<br>");
         return;
     }
-    registerErrorMsg.text = await register(
-        registerform.name,
-        registerform.email,
-        registerform.password
+    editUserErrorMsg.text = await update(
+        edituserform.name,
+        edituserform.email,
+        edituserform.password
     );
-    if (registerErrorMsg.text == "User created") {
-        clearform();
+    if (editUserErrorMsg.text == "User created") clearform();
+};
+const delete_user_form_handler = async () => {
+    editUserErrorMsg.text = await deleteUser();
+    if (editUserErrorMsg.text == "User deleted") {
+        toast.text = "User deleted";
+        logout();
     }
 };
 </script>
@@ -62,43 +68,49 @@ const register_form_handler = async () => {
     <div
         class="bg-indigo-100 m-4 p-4 rounded md:w-96 md:mx-auto grid gap-4 grid-cols-3 grid-rows-3"
     >
-        <p class="text-2xl col-span-3 m-auto">Register</p>
+        <p class="text-2xl col-span-3 m-auto">Edit</p>
         <label class="m-auto">Name</label>
         <input
-            v-model="registerform.name"
+            v-model="edituserform.name"
             type="text"
             class="p-3 col-start-2 col-span-2 m-2 rounded"
         />
         <label class="m-auto">Email</label>
         <input
-            v-model="registerform.email"
+            v-model="edituserform.email"
             type="text"
             class="p-3 col-start-2 col-span-2 m-2 rounded"
         />
         <label class="m-auto">Password</label>
         <input
-            v-model="registerform.password"
+            v-model="edituserform.password"
             type="password"
             class="p-3 col-start-2 col-span-2 m-2 rounded"
         />
         <label class="m-auto">Confirm Password</label>
         <input
-            v-model="registerform.pass2"
+            v-model="edituserform.pass2"
             type="password"
             class="p-3 col-start-2 col-span-2 m-2 rounded"
         />
         <button
-            @click.prevent="register_form_handler()"
+            @click.prevent="edit_user_form_handler()"
             class="bg-indigo-300 hover:bg-indigo-400 m-2 active:bg-indigo-500 active:shadow-lg px-2 py-3 rounded col-span-3"
         >
-            Register
+            Update
+        </button>
+        <button
+            @click.prevent="delete_user_form_handler()"
+            class="bg-red-300 hover:bg-indigo-400 m-2 active:bg-indigo-500 active:shadow-lg px-2 py-3 rounded col-span-3"
+        >
+            Delete Account
         </button>
         <p
-            v-show="registerErrorMsg.text"
+            v-show="editUserErrorMsg.text"
             class="col-span-3 text-red-400 m-auto"
-            :class="{ 'text-black': registerErrorMsg.text == 'User created' }"
+            :class="{ 'text-black': editUserErrorMsg.text == 'User created' }"
         >
-            {{ registerErrorMsg.text }}
+            {{ editUserErrorMsg.text }}
         </p>
     </div>
 </template>

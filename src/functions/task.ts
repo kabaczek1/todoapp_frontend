@@ -18,7 +18,8 @@ const addTasksToLocalArray = async () => {
 };
 
 export const mountTaskList = async () => {
-    tasks.pop();
+    //tasks.pop();
+    tasks.splice(0, tasks.length);
     addTasksToLocalArray();
 };
 

@@ -25,7 +25,9 @@ export const toast = reactive({ text: "" });
 export const formErrorMsg = reactive({ text: "" });
 export const loginErrorMsg = reactive({ text: "" });
 export const registerErrorMsg = reactive({ text: "" });
+export const editUserErrorMsg = reactive({ text: "" });
 export const tasks = reactive([blankTask]);
+export const userEditStatus = reactive({ value: false });
 
 axios.interceptors.request.use((config) => {
     const token = localStorage.getItem("jwt");

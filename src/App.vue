@@ -5,12 +5,15 @@ import NoLogin from "./components/NoLogin.vue";
 import TaskList from "./components/TaskList.vue";
 import BackendOffline from "./components/BackendOffline.vue";
 import Toast from "./components/Toast.vue";
+import UserEdit from "./components/UserEdit.vue";
+import { userEditStatus } from "./setup";
 </script>
 
 <template>
     <NavBar />
-    <NoLogin v-if="user.name == ''" />
-    <TaskList v-if="user.name != ''" />
+    <NoLogin v-if="user.name == '' && !userEditStatus.value" />
+    <TaskList v-if="user.name != '' && !userEditStatus.value" />
+    <UserEdit v-if="userEditStatus.value" />
 
     <Toast />
     <BackendOffline />

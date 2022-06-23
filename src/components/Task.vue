@@ -20,15 +20,15 @@ const time_string = (timestamp: number) => {
         <p class="text-xs font-extralight text-slate-500">
             {{ time_string(task.created_at) }}
         </p>
-        <p class="text-3xl" :class="{ 'text-gray-400': !task.done }">
+        <p class="text-3xl" :class="{ 'text-gray-400': task.done }">
             {{ task.name }}
         </p>
-        <p :class="{ 'text-gray-400': !task.done }">{{ task.desc }}</p>
+        <p :class="{ 'text-gray-400': task.done }">{{ task.desc }}</p>
         <button
             @click.prevent="updateTaskDoneStatus(task._id)"
             class="bg-indigo-300 hover:bg-indigo-400 m-2 active:bg-indigo-500 active:shadow-lg px-2 py-1 rounded col-span-3"
         >
-            {{ task.done ? "Done" : "Not Done" }}
+            {{ task.done ? "Not Done" : "Done" }}
         </button>
         <button
             @click.prevent="deleteTask(task._id)"
